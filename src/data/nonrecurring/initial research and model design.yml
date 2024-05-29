@@ -1,0 +1,9 @@
+- deadline: '2024-06-01'
+  status: done
+  task: review existing financial models
+- deadline: '2024-06-01'
+  status: done
+  task: conduct market analysis
+- deadline: '2024-06-02'
+  status: done
+  task: define model objectives and scope

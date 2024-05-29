@@ -1,0 +1,12 @@
+- deadline: '2024-06-08'
+  status: to do
+  task: identify key risk factors
+- deadline: '2024-06-08'
+  status: to do
+  task: perform scenario analysis
+- deadline: '2024-06-09'
+  status: to do
+  task: assess value at risk
+- deadline: '2024-06-09'
+  status: to do
+  task: stress test model under extreme conditions

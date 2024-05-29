@@ -1,0 +1,12 @@
+- deadline: '2024-06-06'
+  status: to do
+  task: calibrate model parameters
+- deadline: '2024-06-06'
+  status: to do
+  task: optimize model performance
+- deadline: '2024-06-07'
+  status: to do
+  task: conduct sensitivity analysis
+- deadline: '2024-06-07'
+  status: to do
+  task: validate model outputs

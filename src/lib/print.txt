@@ -1,0 +1,31 @@
+===
+# 0
+[r]ecurring or [n]onrecurring
+
+===
+# 1
+[v]iew or [e]dit
+
+===
+# 2
+[c]hronological or [g]raphical
+
+===
+# 3
+[w]ithin one project or [a]cross all projects
+
+===
+# 4
+choose
+
+===
+# 5
+[a]dd, [c]hange or [d]elete
+
+===
+# 6
+add task to [n]ew or [e]xisting project
+
+===
+# 7
+[t]ask or [p]roject

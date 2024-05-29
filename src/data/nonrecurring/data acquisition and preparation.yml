@@ -1,0 +1,12 @@
+- deadline: '2024-06-02'
+  status: done
+  task: identify data sources
+- deadline: '2024-06-02'
+  status: done
+  task: collect historical data
+- deadline: '2024-06-03'
+  status: to do
+  task: clean and preprocess data
+- deadline: '2024-06-03'
+  status: to do
+  task: validate data integrity
