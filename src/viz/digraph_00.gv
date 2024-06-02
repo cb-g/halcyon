@@ -1,0 +1,153 @@
+digraph G {
+	node [color=darkgray fontcolor=black fontname=Symbol shape=rectangle style=rounded]
+	"develop core 
+mathematical models "
+	node [color=darkgray fontcolor=black fontname=Symbol shape=rectangle style=rounded]
+	"implement 
+algorithms "
+	node [color=darkgray fontcolor=black fontname=Symbol shape=rectangle style=rounded]
+	"perform initial 
+backtesting "
+	edge [arrowhead=vee color=darkgray]
+	"develop core 
+mathematical models " -> "implement 
+algorithms "
+	edge [arrowhead=vee color=darkgray]
+	"implement 
+algorithms " -> "perform initial 
+backtesting "
+	node [color=darkgray fontcolor=black fontname=Symbol shape=rectangle style=rounded]
+	"review existing 
+financial models "
+	node [color=darkgray fontcolor=black fontname=Symbol shape=rectangle style=rounded]
+	"conduct market 
+analysis "
+	node [color=darkgray fontcolor=black fontname=Symbol shape=rectangle style=rounded]
+	"define model 
+objectives and 
+scope "
+	edge [arrowhead=vee color=darkgray]
+	"review existing 
+financial models " -> "conduct market 
+analysis "
+	edge [arrowhead=vee color=darkgray]
+	"conduct market 
+analysis " -> "define model 
+objectives and 
+scope "
+	node [color=darkgray fontcolor=black fontname=Symbol shape=rectangle style=rounded]
+	"calibrate model 
+parameters "
+	node [color=darkgray fontcolor=black fontname=Symbol shape=rectangle style=rounded]
+	"optimize model 
+performance "
+	node [color=darkgray fontcolor=black fontname=Symbol shape=rectangle style=rounded]
+	"conduct sensitivity 
+analysis "
+	node [color=darkgray fontcolor=black fontname=Symbol shape=rectangle style=rounded]
+	"validate model 
+outputs "
+	edge [arrowhead=vee color=darkgray]
+	"calibrate model 
+parameters " -> "optimize model 
+performance "
+	edge [arrowhead=vee color=darkgray]
+	"optimize model 
+performance " -> "conduct sensitivity 
+analysis "
+	edge [arrowhead=vee color=darkgray]
+	"conduct sensitivity 
+analysis " -> "validate model 
+outputs "
+	node [color=darkgray fontcolor=black fontname=Symbol shape=rectangle style=rounded]
+	"make slideshow "
+	node [color=darkgray fontcolor=black fontname=Symbol shape=rectangle style=rounded]
+	"rehearse "
+	node [color=darkgray fontcolor=black fontname=Symbol shape=rectangle style=rounded]
+	"deliver 
+presentation to 
+stakeholders "
+	edge [arrowhead=vee color=darkgray]
+	"make slideshow " -> "rehearse "
+	edge [arrowhead=vee color=darkgray]
+	"rehearse " -> "deliver 
+presentation to 
+stakeholders "
+	node [color=darkgray fontcolor=black fontname=Symbol shape=rectangle style=rounded]
+	"identify data 
+sources "
+	node [color=darkgray fontcolor=black fontname=Symbol shape=rectangle style=rounded]
+	"collect historical 
+data "
+	node [color=darkgray fontcolor=black fontname=Symbol shape=rectangle style=rounded]
+	"clean and 
+preprocess data "
+	node [color=darkgray fontcolor=black fontname=Symbol shape=rectangle style=rounded]
+	"validate data 
+integrity "
+	edge [arrowhead=vee color=darkgray]
+	"identify data 
+sources " -> "collect historical 
+data "
+	edge [arrowhead=vee color=darkgray]
+	"collect historical 
+data " -> "clean and 
+preprocess data "
+	edge [arrowhead=vee color=darkgray]
+	"clean and 
+preprocess data " -> "validate data 
+integrity "
+	node [color=darkgray fontcolor=black fontname=Symbol shape=rectangle style=rounded]
+	"document model 
+methodology "
+	node [color=darkgray fontcolor=black fontname=Symbol shape=rectangle style=rounded]
+	"prepare technical 
+report "
+	node [color=darkgray fontcolor=black fontname=Symbol shape=rectangle style=rounded]
+	"summarize key 
+findings for 
+stakeholders "
+	node [color=darkgray fontcolor=black fontname=Symbol shape=rectangle style=rounded]
+	"get feedback and 
+revise report "
+	edge [arrowhead=vee color=darkgray]
+	"document model 
+methodology " -> "prepare technical 
+report "
+	edge [arrowhead=vee color=darkgray]
+	"prepare technical 
+report " -> "summarize key 
+findings for 
+stakeholders "
+	edge [arrowhead=vee color=darkgray]
+	"summarize key 
+findings for 
+stakeholders " -> "get feedback and 
+revise report "
+	node [color=darkgray fontcolor=black fontname=Symbol shape=rectangle style=rounded]
+	"identify key risk 
+factors "
+	node [color=darkgray fontcolor=black fontname=Symbol shape=rectangle style=rounded]
+	"perform scenario 
+analysis "
+	node [color=darkgray fontcolor=black fontname=Symbol shape=rectangle style=rounded]
+	"assess value at 
+risk "
+	node [color=darkgray fontcolor=black fontname=Symbol shape=rectangle style=rounded]
+	"stress test model 
+under extreme 
+conditions "
+	edge [arrowhead=vee color=darkgray]
+	"identify key risk 
+factors " -> "perform scenario 
+analysis "
+	edge [arrowhead=vee color=darkgray]
+	"perform scenario 
+analysis " -> "assess value at 
+risk "
+	edge [arrowhead=vee color=darkgray]
+	"assess value at 
+risk " -> "stress test model 
+under extreme 
+conditions "
+}

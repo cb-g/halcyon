@@ -3,6 +3,7 @@ import yaml as yml
 import datetime as dt
 import colorama as cr
 from graphviz import Digraph
+from typing import List, Dict
 
 
 class data_handling:
@@ -50,7 +51,7 @@ class data_handling:
         with open(self.print_txt_path, "r") as file:
             self.txt = file.read()
 
-    def t_o(self, choice, clear=True, tree=False):
+    def t_o(self, choice, clear=True, tree=False, graphic=False):
         """
         terminal output
 
@@ -70,6 +71,10 @@ class data_handling:
                     self.to_print = "\n".join(lines[1:]).strip()
                     print(self.to_print)
                     self.u_input = input()
+        if graphic:
+            return int(self.u_input) - 1
+        else:
+            return None
 
     def timedeltas(self):
         """
@@ -223,84 +228,150 @@ class data_handling:
         self.data_path = os.path.join(self.data_dir_path, self.yml_f[pi])
         os.remove(self.data_path)
 
-    def menu(self):
-        """
-        navigation
-        """
-        self.c_t()
-        self.dir_tree()
-        self.load_txt()
-
-        while True:
-
-            self.t_o("1", clear=False)
-
-            if self.u_input == "v":
-                self.t_o("2")
-                chrono = False
-                graphic = False
-                if self.u_input == "c":
-                    chrono = True
-                if self.u_input == "g":
-                    graphic = True
-                self.t_o("3")
-                if chrono & (self.u_input == "w"):
-                    self.print_projects()
-                    self.t_o("4", clear=False)
-                    self.v_1_chrono()
-                if chrono & (self.u_input == "a"):
-                    self.v_a_chrono()
-                if graphic & (self.u_input == "w"):
-                    pass
-                if graphic & (self.u_input == "a"):
-                    pass
-                break
-
-            if self.u_input == "e":
-                self.t_o("5")
-                if self.u_input == "a":
-                    self.t_o("6")
-                    if self.u_input == "n":
-                        self.add_project()
-                        self.add_task(new_proj=True)
-                    if self.u_input == "e":
-                        self.print_projects()
-                        self.t_o("4", clear=False)
-                        self.add_task()
-                    break
-                if self.u_input == "c":
-                    self.t_o("7")
-                    if self.u_input == "p":
-                        self.print_projects()
-                        self.t_o("4", clear=False)
-                        self.rename_project()
-                    if self.u_input == "t":
-                        self.print_projects(filter=True)
-                        self.t_o("4", clear=False)
-                        self.edit_task()
-                if self.u_input == "d":
-                    self.t_o("7")
-                    if self.u_input == "p":
-                        self.print_projects()
-                        self.t_o("4", clear=False)
-                        self.delete_project()
-                    if self.u_input == "t":
-                        self.print_projects(filter=True)
-                        self.t_o("4", clear=False)
-                        self.delete_task()
-                break
-
-            break
-
 
 class graphviz_auto:
     def __init__(
         self,
+        max_char: int = 20,
+        filepath: str = "src/viz",
+        data_dir_path: str = "src/data/nonrecurring",
         filename: str = "digraph_00.gv",
-        fileformat: str = "pdf",  # 'png', 'svg'
+        # fileformat: str = "pdf",
+        fileformat: str = "png",
+        # fileformat: str = "svg",
     ):
+        self.filepath = filepath
+        self.max_line_len = max_char  # linebreak
         self.digraph = Digraph(
             "G",
             format=fileformat,
             filename=filename,
         )
+        self.fileformat = fileformat
+        self.filename = filename
+        self.data_dir_path = data_dir_path
+
+    def autolinebreak(self, string: str) -> str:
+        x = self.max_line_len
+        lst = string.split()
+        line = ""
+        str_final = ""
+        for word in lst:
+            if len(line + " " + word) <= x:
+                str_final += word + " "
+                line += word + " "
+            else:
+                str_final += "\n" + word + " "
+                line = word + " "
+        return str_final
+
+    def design_node(self, choose_node_design: str = "node_design_0"):
+        """
+        shape: https://graphviz.gitlab.io/doc/info/shapes.html#polygon
+        style: https://graphviz.gitlab.io/doc/info/shapes.html#styles-for-nodes
+        color: https://graphviz.gitlab.io/doc/info/colors.html#x11
+        fontname: https://graphviz.gitlab.io/faq/font/#default-fonts-and-postscript-fonts
+        """
+
+        node_design = {
+            "shape": "rectangle",
+            "style": "rounded",
+            "color": "darkgray",
+            "fontcolor": "black",
+            # "fontname": "Times-Roman",
+            "fontname": "Symbol",
+        }
+
+        if choose_node_design == "node_design_red":
+            node_design = {
+                "shape": "rectangle",
+                "style": "rounded",
+                "color": "firebrick",
+                "fontcolor": "black",
+                # "fontname": "Times-Roman",
+                "fontname": "Symbol",
+            }
+        if choose_node_design == "node_design_green":
+            node_design = {
+                "shape": "rectangle",
+                "style": "rounded",
+                "color": "darkgreen",
+                "fontcolor": "white",
+                # "fontname": "Times-Roman",
+                "fontname": "Symbol",
+            }
+
+        self.digraph.attr(
+            "node",
+            shape=node_design["shape"],
+            style=node_design["style"],
+            color=node_design["color"],
+            fontcolor=node_design["fontcolor"],
+            fontname=node_design["fontname"],
+        )
+
+    def design_edge(self):
+        """
+        color: https://graphviz.gitlab.io/doc/info/colors.html#x11
+        arrowhead: https://graphviz.gitlab.io/doc/info/arrows.html#primitive-shapes
+        """
+        edge_design = {
+            "color": "darkgray",
+            "arrowhead": "vee",
+        }
+
+        self.digraph.attr(
+            "edge", color=edge_design["color"], arrowhead=edge_design["arrowhead"]
+        )
+
+    def make_node(
+        self, node_content: str = "empty", choose_node_design: str = "node_design_0"
+    ):
+        self.design_node(choose_node_design)
+        self.digraph.node(self.autolinebreak(node_content))
+
+    def make_nodes(self, *args, choose_node_design: str = "node_design_0"):
+        for i in range(len(args)):
+            self.make_node(node_content=args[i], choose_node_design=choose_node_design)
+
+    def make_edge(
+        self,
+        start_node: str = "empty",
+        end_node: str = "empty",
+    ):
+        self.design_edge()
+        self.digraph.edge(self.autolinebreak(start_node), self.autolinebreak(end_node))
+
+    def make_chain(self, *args):
+        for i in range(len(args) - 1):
+            self.make_edge(args[i], args[i + 1])
+
+    def viz(self):
+        self.digraph.render(directory=self.filepath, view=False)
+        ff = "." + self.fileformat
+        print(f"rendered to {os.path.join(self.filepath, self.filename + ff)}")
+
+    def dict_reader(self, across=False, u_input=None) -> List[Dict[str, str]]:
+        collect = []
+
+        if not across:
+            self.yml_f = [
+                f for f in os.listdir(self.data_dir_path) if f.endswith(".yml")
+            ]
+            f_path = os.path.join(self.data_dir_path, self.yml_f[u_input])
+            with open(f_path, "r") as proj_yml:
+                proj = yml.safe_load(proj_yml)
+            collect.append(proj)
+
+        if across:
+            self.yml_f = [
+                f for f in os.listdir(self.data_dir_path) if f.endswith(".yml")
+            ]
+
+            for f in self.yml_f:
+                f_path = os.path.join(self.data_dir_path, f)
+                with open(f_path, "r") as proj_yml:
+                    proj = yml.safe_load(proj_yml)
+                collect.append(proj)
+
+        return collect
